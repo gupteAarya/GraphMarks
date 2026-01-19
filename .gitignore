@@ -1,6 +1,6 @@
 .env
-#session.session
-#session.session-journal
+session.session
+session.session-journal
 #data.db
 # Python cache
 __pycache__/
