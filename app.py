@@ -171,4 +171,4 @@ def view():
 
 if __name__ == "__main__":
     # ❗ disable reloader
-    app.run(debug=False,port=4000)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 4000)))
