@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GraphMarks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="{{ url_for('static', filename='markslogo.png') }}">
+
+    <style>
+        /* Base & Reset */
+        body {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 480px;
+            margin: auto;
+            padding: 10px 15px;
+        }
+
+        /* Card for form */
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Form */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        input[type="date"],
+        input[type="number"],
+        select[name="test_type"],
+        #test_type {
+            padding: 10px 12px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        input[type="date"]:focus,
+        input[type="number"]:focus,
+        select:focus
+        {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+
+        /* Submit button */
+        button {
+            padding: 12px;
+            font-size: 1rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Responsive text */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            p {
+                font-size: 0.95rem;
+            }
+        }
+        /* ---------- Custom Select Styling ---------- */
+
+select#test_type {
+    -webkit-appearance: none;   /* Chrome/Safari */
+    -moz-appearance: none;      /* Firefox */
+    appearance: none;
+
+    padding: 10px 40px 10px 12px; /* right padding for arrow */
+    font-size: 1rem;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #333;
+    background-color: #fff;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+
+    /* Custom arrow */
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 14px;
+}
+
+/* Focus state (match inputs) */
+select#test_type:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    outline: none;
+}
+
+/* Hover state */
+select#test_type:hover {
+    border-color: #2980b9;
+}
+
+/* Dropdown options (limited support, but helps) */
+select#test_type option {
+    font-size: 1rem;
+    padding: 10px;
+    color: #333;
+}
+
+    </style>
+</head>
+<body>
+<div style="height: 2rem;"></div>
+<div class="container">
+    <div class="card">
+        <center>
+            <img src="/static/markslogo.png" style="height: 6rem;border: 1px #ccc solid;border-radius: 20%;">
+        </center>
+        <h1>Hello Aarya 👋</h1>
+        <p>Enter your test marks below:</p>
+        <form action="/send" method="post">
+            <input type="date" name="date" placeholder="Enter Test Date" required>
+            <input type="number" name="pmarks" placeholder="Physics Marks" required>
+            <input type="number" name="cmarks" placeholder="Chemistry Marks" required>
+            <input type="number" name="mmarks" placeholder="Mathematics Marks" required>
+            <select name="test_type" id="test_type" required>
+            <option value="PAT">Part Test</option>
+            <option value="ADV">6 Hour Advanced</option>
+            <option value="JEM">JEE-MAIN</option>
+            </select>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

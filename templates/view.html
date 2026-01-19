@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Marks View</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="{{ url_for('static', filename='markslogo.png') }}">
+    <style>
+        /* Base & Reset */
+        body {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h2, h3 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 20px 0;
+        }
+
+        /* Container */
+        .container {
+            max-width: 480px; /* mobile width */
+            margin: auto;
+            padding: 10px 15px;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Form */
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 8px 12px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: white;
+            cursor: pointer;
+            outline: none;
+        }
+
+        select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+
+        /* Improvements list */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+
+        ul li {
+            background-color: #ecf0f1;
+            margin: 5px 0;
+            padding: 10px 12px;
+            border-left: 5px solid #3498db;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        ul li span {
+            font-weight: bold;
+        }
+
+        /* Graph image */
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Cards for sections */
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* Responsive text */
+        @media (max-width: 480px) {
+            h2, h3 {
+                font-size: 1.2rem;
+            }
+            table {
+                font-size: 0.85rem;
+            }
+            ul li {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Marks Table</h2>
+        {{ table|safe }}
+    </div>
+
+    <div class="card">
+        <h2>Improvement</h2>
+
+        <form method="get" action="/view">
+            <label for="months">Show past:</label>
+            <select name="months" id="months" onchange="this.form.submit()">
+                <option value="1" {% if selected_months == 1 %}selected{% endif %}>1 month</option>
+                <option value="2" {% if selected_months == 2 %}selected{% endif %}>2 months</option>
+                <option value="3" {% if selected_months == 3 %}selected{% endif %}>3 months</option>
+                <option value="4" {% if selected_months == 4 %}selected{% endif %}>4 months</option>
+                <option value="5" {% if selected_months == 5 %}selected{% endif %}>5 months</option>
+                <option value="6" {% if selected_months == 6 %}selected{% endif %}>6 months</option>
+                <option value="7" {% if selected_months == 7 %}selected{% endif %}>7 months</option>
+            </select>
+            <select name="test_type" onchange="this.form.submit()">
+            <option value="PAT">Part Test</option>
+            <option value="ADV">6 Hour Advanced</option>
+            <option value="JEM">JEE-MAIN</option>
+            </select>
+        </form>
+
+        <h3>Improvements:</h3>
+        <ul>
+            {% for subject, improvement in improvements.items() %}
+                <li>
+                    <span>{{ subject.capitalize() }}</span>: 
+                    {% if improvement is not none %}
+                        {{ improvement }}%
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        <img src="{{ url_for('static', filename=image) }}" width="600">
+    </div>
+
+</div>
+
+</body>
+</html>

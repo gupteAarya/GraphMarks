@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Message Sent ✅</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="{{ url_for('static', filename='markslogo.png') }}">
+
+    <style>
+        body {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            padding: 25px 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .checkmark {
+            font-size: 3rem;
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .message-summary {
+            background-color: #f1f1f1;
+            border-radius: 8px;
+            padding: 12px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            word-wrap: break-word;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 1rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.3rem;
+            }
+            .checkmark {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="checkmark">✔️</div>
+    <h1>Message Sent Successfully!</h1>
+    <p>Your test marks have been recorded and sent to Telegram.</p>
+    <div class="message-summary">
+        {{ msg }}
+    </div>
+    <form action="/" method="get">
+        <button type="submit">Enter Another Test</button>
+    </form>
+</div>
+
+</body>
+</html>
