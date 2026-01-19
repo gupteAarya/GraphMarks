@@ -55,11 +55,25 @@ async def start_client():
     print("Client started!")
 
 asyncio.run_coroutine_threadsafe(start_client(), loop)
+# Add these lines after line 57
+print("Telegram client initialization started...")
+print(f"API_ID: {'set' if api_id else 'NOT SET'}")
+print(f"API_HASH: {'set' if api_hash else 'NOT SET'}")
 
 async def send_msg(msg):
-    print(f"Sending message: {msg}")
-    result = await client.send_message("me", msg)
-    print("Message sent result:", result)
+    try:
+        print(f"Attempting to send message: {msg}")
+        if not client.is_connected():
+            print("Client not connected, attempting to connect...")
+            await client.connect()
+        me = await client.get_me()
+        print(f"Logged in as: {me.username} (ID: {me.id})")
+        result = await client.send_message("me", msg)
+        print("Message sent successfully!")
+        return result
+    except Exception as e:
+        print(f"Error sending message: {str(e)}")
+        raise
 
 async def send_graph_to_telegram(path, test_type):
     test_name = {
@@ -138,7 +152,7 @@ def home():
 def view():
     # Get months from query string
     months = request.args.get("months", default="1")
-    test_type = request.args.get("test_type", default="PAT")
+    test_type = request.args.get("test_type", default="ADV")
 
     try:
         months = int(months)
@@ -154,7 +168,7 @@ def view():
     path = analysis_manager.generate_line_graph(months=months, test_type=test_type)
     improvements = analysis_manager.calculate_improvement(months=months, test_type=test_type)
     print("Improvements:", improvements)  # debug
-
+    print("PATH", path)
     if path is None:
         return "No data yet"
 
@@ -171,4 +185,4 @@ def view():
 
 if __name__ == "__main__":
     # ❗ disable reloader
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 4000)))
+    app.run(debug=False,host='0.0.0.0', port=int(os.environ.get('PORT', 4000)))
