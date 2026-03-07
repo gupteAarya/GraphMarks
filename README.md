@@ -27,8 +27,8 @@ This allows quick feedback after every test without manually analyzing marks.
 
 
 ## 💻 Tech Stack
-- Charts: Matplotlib, Numpy, Pandas
-- Frontend: HTML, CSS, JavaScript
+- Frontend Framework : HTML, CSS, JavaScript
+- Backend Framework: Flask
 - Charts: Matplotlib, Numpy, Pandas
 - Database: SQL
 - Backend: Python3
